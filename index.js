@@ -53,7 +53,7 @@ function insertEmTela(text, status, i){
             <input type="checkbox" ${status} data-i=${i} onchange="done(this, ${i})" />
             <span data-si=${i}> ${text} </span>
             <button onclick="removeItem(${i})" data-i=${i}> <i class="bx bx-trash"> </i> </button>
-            <button onclick="removeItem(${i})" data-i=${i}> <i class="bx bx-edit"> </i> </button>
+            <button onclick="editItem(${i})" data-i=${i}> <i class="bx bx-edit"> </i> </button>
         </div>
     `
     ul.appendChild(li)
@@ -77,6 +77,9 @@ function done(chk, i){
     updateDB()
 }
 
+function editItem(i){
+    
+}
 
 function removeItem(i){
     itensDB.splice(i, 1)
