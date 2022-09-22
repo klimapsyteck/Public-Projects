@@ -2,6 +2,8 @@ const texto = document.querySelector('input')
 const btnInsert = document.querySelector('.divInsert button')
 const btnDeleteAll = document.querySelector('.header button')
 const ul = document.querySelector('ul')
+let edit = false;
+let info = null;
 
 let itensDB = []
 
@@ -12,13 +14,28 @@ btnDeleteAll.onclick = () => {
 
 texto.addEventListener('keypress', e =>{
     if(e.key === 'Enter' && texto.valeu != ''){
-        setItemDB()
+        if(edit === true){
+            let newTask = texto.value
+            itensDB[info] = {'item': newTask} 
+            edit = false  
+            info = null      
+            updateDB()
+        }else{
+            setItemDB()
+        }
+        
     }
 })
 
 btnInsert.onclick = () =>{
-    if(texto.value != ''){
+    if(texto.value != '' && edit === false){
         setItemDB()
+    }else{
+        let newTask = texto.value
+        itensDB[info] = {'item': newTask} 
+        edit = false  
+        info = null      
+        updateDB()
     }
 }
 
@@ -52,8 +69,8 @@ function insertEmTela(text, status, i){
         <div class="divLi">
             <input type="checkbox" ${status} data-i=${i} onchange="done(this, ${i})" />
             <span data-si=${i}> ${text} </span>
+            <button onclick="loadItem(${i})" data-i=${i}> <i class="bx bx-edit gy-color"> </i> </button>
             <button onclick="removeItem(${i})" data-i=${i}> <i class="bx bx-trash"> </i> </button>
-            <button onclick="editItem(${i})" data-i=${i}> <i class="bx bx-edit"> </i> </button>
         </div>
     `
     ul.appendChild(li)
@@ -77,8 +94,10 @@ function done(chk, i){
     updateDB()
 }
 
-function editItem(i){
-    
+function loadItem(i){
+    texto.value = itensDB[i].item  
+    edit = true    
+    info = i 
 }
 
 function removeItem(i){

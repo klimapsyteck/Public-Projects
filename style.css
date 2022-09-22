@@ -104,6 +104,10 @@ li {
   list-style-type: none;
 }
 
+button .gy-color{
+  color: #9ACD32;
+}
+
 .line-through {
   text-decoration: line-through;
 }
