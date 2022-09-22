@@ -101,8 +101,13 @@ function loadItem(i){
 }
 
 function removeItem(i){
-    itensDB.splice(i, 1)
-    updateDB()
+    if(confirm("Deseja realmente excluir?") === true){
+        itensDB.splice(i, 1)
+        updateDB()
+    }else{
+        return
+    }
+    
 }
 
 
