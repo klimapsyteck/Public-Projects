@@ -15,11 +15,7 @@ btnDeleteAll.onclick = () => {
 texto.addEventListener('keypress', e =>{
     if(e.key === 'Enter' && texto.valeu != ''){
         if(edit === true){
-            let newTask = texto.value
-            itensDB[info] = {'item': newTask} 
-            edit = false  
-            info = null      
-            updateDB()
+            changing()
         }else{
             setItemDB()
         }
@@ -27,15 +23,18 @@ texto.addEventListener('keypress', e =>{
     }
 })
 
+function changing(){
+    let newTask = texto.value
+    itensDB[info] = {'item': newTask} 
+    edit = false  
+    info = null      
+    updateDB()
+}
 btnInsert.onclick = () =>{
     if(texto.value != '' && edit === false){
         setItemDB()
     }else{
-        let newTask = texto.value
-        itensDB[info] = {'item': newTask} 
-        edit = false  
-        info = null      
-        updateDB()
+        changing()
     }
 }
 
@@ -103,6 +102,7 @@ function loadItem(i){
 function removeItem(i){
     if(confirm("Deseja realmente excluir?") === true){
         itensDB.splice(i, 1)
+        texto.value = ''
         updateDB()
     }else{
         return
