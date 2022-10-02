@@ -8,8 +8,10 @@ let info = null;
 let itensDB = []
 
 btnDeleteAll.onclick = () => {
-    itensDB = []    
-    updateDB()
+    if(confirm('Deseja remover todas as tarefas?') === true){
+        itensDB = []    
+        updateDB()
+    }   
 }
 
 texto.addEventListener('keypress', e =>{
